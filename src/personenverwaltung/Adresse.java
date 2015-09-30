@@ -1,5 +1,7 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 import exceptions.UngueltigeEingabeException;
 
 /**
@@ -7,7 +9,8 @@ import exceptions.UngueltigeEingabeException;
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Adresse {
+class Adresse implements Serializable {
+	private static final long serialVersionUID = -2477723777225965585L;
 	private static int anzahlAdresseObjekt;
 	private int adresseObjektNummer;
 	private String strasse;

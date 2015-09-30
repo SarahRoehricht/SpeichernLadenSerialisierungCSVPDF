@@ -1,5 +1,7 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 import exceptions.UngueltigeEingabeException;
 
 /**
@@ -8,7 +10,8 @@ import exceptions.UngueltigeEingabeException;
  * @author  Alfred Loran
  * @version 1.0.0
  */
-class Name {
+class Name implements Serializable {
+	private static final long serialVersionUID = 9034724349333412121L;
 	private static int anzahlNamenObjekte = 0;
 	private int nameObjektNummer;
 	private String vorName;
