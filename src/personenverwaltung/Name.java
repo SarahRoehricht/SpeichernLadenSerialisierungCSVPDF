@@ -116,6 +116,7 @@ class Name {
 	
 	/**
 	 * Diese Methode liefert die Daten des Objektes.
+	 * @return die Daten des Objektes.
 	 * @since 1.0.0
 	 */
 	@Override
