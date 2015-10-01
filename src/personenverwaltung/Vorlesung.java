@@ -15,6 +15,7 @@ class Vorlesung {
 	private String vorlesungsName;
 	private double note;
 	private Student student;
+	private Dozent dozent;
 
 	/**
 	 * Erzuegt ein Vorlesungs - Objekt.
@@ -118,6 +119,15 @@ class Vorlesung {
 	protected void fuegeStudentHinzu(Student student) {
 		this.student = student;
 	}
+	
+	/**
+	 * Diese Methode setzt den Dozenten der die Note haelt.
+	 * @param dozent Der uebergebene Dozent.
+	 * @since 1.0.0
+	 */
+	protected void haltenderDozent(Dozent dozent) {
+		this.dozent = dozent;
+	}
 
 	/**
 	 * Liefert die Daten des Objektes.
@@ -125,7 +135,8 @@ class Vorlesung {
 	 */
 	@Override
 	public String toString() {
-		return	"Vorlesungskuerzel " + getVorlesungsKuerzel() + "\n" + 
+		return	"Gehalten von: " + dozent.toString() + "\n" +
+				"Vorlesungskuerzel " + getVorlesungsKuerzel() + "\n" + 
 	            "Vorlesungsname: " + getVorlesungsName() + "\n" +
 	            "Note: " + getNote();
 	}
