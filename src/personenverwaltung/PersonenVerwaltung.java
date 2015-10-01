@@ -38,4 +38,20 @@ public class PersonenVerwaltung implements iDozent, iStudent{
 	public void nehmeAnVorlesungTeil(String nameVorlesung) {	
 		student.nimmtAnVorlesungTeil(vorlesung);
 	}
+	
+	/**
+	 * Liefert die Daten des Objektes.
+	 * @return die Daten des Objektes.
+	 * @since 1.0.0
+	 */
+	@Override
+	public String toString() {
+		String ausgabe = "";
+		if(this.student != null) {
+			ausgabe += this.student.toString();
+		} else {
+			ausgabe += "Noch keine Daten vorhanden!";
+		}
+		return ausgabe;
+	}
 }
