@@ -1,8 +1,12 @@
 package personenverwaltung;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.Properties;
 
+import hilfsklassen.Serialisieren;
 import interfaces.iDozent;
+import interfaces.iSpeichernLadenSerialisiert;
 import interfaces.iStudent;
 
 /**
@@ -10,7 +14,7 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class PersonenVerwaltung implements iDozent, iStudent, Serializable{
+public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSerialisiert, Serializable{
 	private static final long serialVersionUID = 1789253660935452408L;
 	private Student student;
 	private Dozent dozent;
@@ -40,6 +44,33 @@ public class PersonenVerwaltung implements iDozent, iStudent, Serializable{
 	@Override
 	public void nehmeAnVorlesungTeil(String nameVorlesung) {	
 		student.nimmtAnVorlesungTeil(vorlesung);
+	}
+	
+
+	@Override
+	public void speichernSerialisiert(String dateiName) {
+		Serialisieren serialisieren = new Serialisieren();
+		Properties properties = new Properties();
+		properties.setProperty("Dateiname", dateiName + ".ser");
+		properties.setProperty("Modus", "s");
+		try {
+			serialisieren.oeffnen(properties);
+			serialisieren.schreiben(this);
+		} catch(IOException fehler) {
+			System.err.println(fehler.getMessage());
+		} finally {
+			try {
+				serialisieren.schliessen(null);
+			} catch(IOException fehler) {
+				System.err.println(fehler.getMessage());
+			}
+		}
+	}
+	
+	@Override
+	public PersonenVerwaltung ladeSerialisiert(String dateiName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/**
