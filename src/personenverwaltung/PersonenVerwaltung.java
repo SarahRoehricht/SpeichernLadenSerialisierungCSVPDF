@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Properties;
 
+import hilfsklassen.PDF;
 import hilfsklassen.Serialisieren;
 import interfaces.iDozent;
 import interfaces.iSpeichernLadenSerialisiert;
+import interfaces.iSpeichernPDF;
 import interfaces.iStudent;
 
 /**
@@ -14,7 +16,7 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSerialisiert, Serializable{
+public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSerialisiert, iSpeichernPDF, Serializable{
 	private static final long serialVersionUID = 1789253660935452408L;
 	private Student student;
 	private Dozent dozent;
@@ -94,6 +96,25 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 		return null;
 	}
 	
+	@Override
+	public void speichernPDF(String dateiName) {
+		PDF pdf = new PDF();
+		Properties properties = new Properties();
+		properties.setProperty("dateiName", dateiName + ".pdf");
+		try {
+			pdf.oeffnen(properties);
+			pdf.schreiben(this.toString());
+		} catch(IOException fehler) {
+			System.err.println(fehler.getMessage());
+		} finally {
+			try {
+				pdf.schliessen(null);
+			} catch(IOException fehler) {
+				System.err.println(fehler.getMessage());
+			}
+		}
+	}
+		
 	/**
 	 * Liefert die Daten des Objektes.
 	 * @return die Daten des Objektes.
