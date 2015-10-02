@@ -67,9 +67,30 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 		}
 	}
 	
-	@Override
-	public PersonenVerwaltung ladeSerialisiert(String dateiName) {
-		// TODO Auto-generated method stub
+	/**
+	 * Laedt die das Objekt in der Serialisierten Datei.
+	 * @param dateiName Der uebergebene Dateiname.
+	 * @return das deserialisierte Objekt.
+	 * @since 1.0.0
+	 */
+	public static PersonenVerwaltung ladeSerialisiert(String dateiName) {
+		Serialisieren serialisieren = new Serialisieren();
+		Properties properties = new Properties();
+		properties.setProperty("Dateiname", dateiName + ".ser");
+		properties.setProperty("Modus", "l");
+		try {
+			serialisieren.oeffnen(properties);
+			PersonenVerwaltung pV = (PersonenVerwaltung)serialisieren.lesen();
+			return pV;
+		} catch(IOException fehler) {
+			System.err.println(fehler.getMessage());
+		} finally {
+			try {
+				serialisieren.schliessen(null);
+			} catch(IOException fehler) {
+				System.err.println(fehler.getMessage());	
+			}
+		}
 		return null;
 	}
 	

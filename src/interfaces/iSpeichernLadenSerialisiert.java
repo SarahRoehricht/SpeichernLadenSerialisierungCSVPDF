@@ -14,13 +14,5 @@ public interface iSpeichernLadenSerialisiert {
 	 * @param dateiName Der uebergebene Dateiname.
 	 * @since 1.0.0
 	 */
-	public void speichernSerialisiert(String dateiName);
-	
-	/**
-	 * Diese Methode laedt die PersonenVerwaltungsklasse aus der Serialisierungsdatei.
-	 * @param dateiName Der uebergebene Dateiname.
-	 * @return das deserialisierte PersonenVerwaltungs - Objekt
-	 * @since 1.0.0
-	 */
-	public PersonenVerwaltung ladeSerialisiert(String dateiName);
+	public void speichernSerialisiert(String dateiName);	
 }
