@@ -15,7 +15,7 @@ public class Serialisieren implements iSpeichernLaden {
 	
 	/**
 	 * Oeffnet die Serialisierungsdatei.
-	 * @param Das uebergebene Properties Objekt.
+	 * @param p Das uebergebene Properties Objekt.
 	 * @throws IOException Wird geworfen, wenn die Datei nicht geoeffnet werden kann oder der
 	 * 					   Modus nicht korrekt gesetzt wurde.
 	 * @since 1.0.0
@@ -40,7 +40,7 @@ public class Serialisieren implements iSpeichernLaden {
 	/**
 	 * Schreibt den Byte - Strom in die Datei.
 	 * @since Das serialisierte Objekt.
-	 * @throws Wird geworfen, wenn das Schreiben nicht funktioniert.
+	 * @throws IOException Wird geworfen, wenn das Schreiben nicht funktioniert.
 	 * @since 1.0.0
 	 */
 	@Override
