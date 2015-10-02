@@ -1,11 +1,14 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 /**
  * Diese Klasse bildet eine Person ab.
  * @author Alfred Loran
  * @version 1.0.0
  */
-abstract class Person {
+abstract class Person implements Serializable{
+	private static final long serialVersionUID = 5859672337581572952L;
 	private static int anzahlPersonenObjekte;
 	private int personenNummer;
 	private Name name;

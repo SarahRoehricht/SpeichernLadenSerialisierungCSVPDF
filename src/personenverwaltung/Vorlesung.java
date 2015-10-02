@@ -1,5 +1,7 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 import exceptions.UngueltigeEingabeException;
 
 /**
@@ -8,7 +10,8 @@ import exceptions.UngueltigeEingabeException;
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Vorlesung {
+class Vorlesung implements Serializable{
+	private static final long serialVersionUID = -5805656603587345820L;
 	private static int anzahlVorlesungsObjekte;
 	private int vorlesungsNummer;
 	private String vorlesungsKuerzel;

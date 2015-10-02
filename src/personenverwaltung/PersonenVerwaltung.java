@@ -1,5 +1,7 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 import interfaces.iDozent;
 import interfaces.iStudent;
 
@@ -8,7 +10,8 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class PersonenVerwaltung implements iDozent, iStudent{
+public class PersonenVerwaltung implements iDozent, iStudent, Serializable{
+	private static final long serialVersionUID = 1789253660935452408L;
 	private Student student;
 	private Dozent dozent;
 	private Vorlesung vorlesung;

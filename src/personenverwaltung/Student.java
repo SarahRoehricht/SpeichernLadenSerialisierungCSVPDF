@@ -1,11 +1,14 @@
 package personenverwaltung;
 
+import java.io.Serializable;
+
 /**
  * Diese Klasse bildet einen Studenten ab.
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Student extends Person {
+class Student extends Person implements Serializable{
+	private static final long serialVersionUID = 7138562806035852454L;
 	private String matrikelNummer;
 	private Vorlesung vorlesung;
 	
