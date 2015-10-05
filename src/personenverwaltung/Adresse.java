@@ -100,7 +100,7 @@ class Adresse implements Serializable {
 	 * @since 1.0.0
 	 */
 	private void setHausNummer(int hausNummer) {
-		if(hausNummer <= 0) {
+		if(hausNummer < 0) {
 			throw new UngueltigeEingabeException("Geben Sie eine posiive Zahl ein!");
 		} else {
 			this.hausNummer = hausNummer;

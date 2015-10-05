@@ -47,19 +47,14 @@ public class CSV implements iSpeichernLaden {
 
 	@Override
 	public Object lesen() throws IOException {
-		String line;
+		String linie;
 		ArrayList<String> linien = new ArrayList<String>();
 		
-		while((line = br.readLine()) != null) {
-			linien.add(line);
+		while((linie = br.readLine()) != null) {
+			linien.add(linie);
 		}
-		
-		String[][] ausgabe = new String[linien.size()][];
-		
-		for(int i = 0; i < ausgabe.length; i++) {
-			ausgabe[i] = linien.get(i).split(",");
-		}
-		return ausgabe;
+				
+		return linien;
 	}
 
 	@Override

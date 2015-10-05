@@ -107,7 +107,9 @@ class Vorlesung implements Serializable{
 	 * @since 1.0.0
 	 */
 	protected void setNote(double note) {
-		if(note < 1 || note > 5) {
+		if(note == 0) {
+			this.note = 0;
+		} else if(note < 0 || note > 5) {
 			throw new UngueltigeEingabeException("Bitte geben Sie eine Note zwischen 1 und 5 ein!");
 		} else {
 			this.note = note;
@@ -129,6 +131,19 @@ class Vorlesung implements Serializable{
 	 * @since 1.0.0
 	 */
 	protected void haltenderDozent(Dozent dozent) {
+		this.dozent = dozent;
+	}
+	
+	/**
+	 * Diese Methode bietet die Möglichkeit die Werte direkt zu setzen.
+	 * Sie soll lediglich beim laden der CSV ihre Verwendung finden.
+	 * @param vorlesungsKuerzel Das uebergebene Vorlesungskuerzel.
+	 * @param vorlesungsName Der uebergebene Vorlesungsname.
+	 * @since 1.0.0
+	 */
+	protected void setVorlesung(String vorlesungsKuerzel, String vorlesungsName, Dozent dozent) {
+		this.vorlesungsKuerzel = vorlesungsKuerzel;
+		this.vorlesungsName = vorlesungsName;
 		this.dozent = dozent;
 	}
 

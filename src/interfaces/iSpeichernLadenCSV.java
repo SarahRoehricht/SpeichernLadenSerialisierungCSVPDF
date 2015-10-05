@@ -1,5 +1,7 @@
 package interfaces;
 
+import personenverwaltung.PersonenVerwaltung;
+
 /**
  * Dieses Interface beinhaltet die Methoden zum Speichern der CSV.
  * @author Alfred Loran
@@ -12,4 +14,12 @@ public interface iSpeichernLadenCSV {
 	 * @since 1.0.0
 	 */
 	public void speichernCSV(String dateiName);
+	
+	/**
+	 * Diese Methode laedt die Objekte aus der CSV.
+	 * @param dateiName Der uebergebene Dateiname.
+	 * @since 1.0.0
+	 */
+	public PersonenVerwaltung ladecsv(String dateiName);
+	
 }

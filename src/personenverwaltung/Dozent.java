@@ -49,7 +49,7 @@ class Dozent extends Person implements Serializable {
 		} else {
 			this.vorlesung.setNote(note);
 		}
-	}
+	}	
 	
 	/**
 	 * Liefert die Daten des Objektes.

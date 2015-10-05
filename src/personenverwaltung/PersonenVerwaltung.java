@@ -2,6 +2,7 @@ package personenverwaltung;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import hilfsklassen.CSV;
@@ -20,9 +21,13 @@ import interfaces.iStudent;
  */
 public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSerialisiert, iSpeichernPDF, iSpeichernLadenCSV,Serializable{
 	private static final long serialVersionUID = 1789253660935452408L;
+	private static Dozent geladenerDozent = null;
+	private static Vorlesung geladeneVorlesung = null;
+	private static Student geladenerStudent = null;
 	private Student student;
 	private Dozent dozent;
 	private Vorlesung vorlesung;
+	private PersonenVerwaltung pV;
 	
 	/**
 	 * Erzeugt einen Dozenten.
@@ -82,7 +87,7 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 	 */
 	@Override
 	public void nehmeAnVorlesungTeil(String nameVorlesung) {	
-		student.nimmtAnVorlesungTeil(vorlesung);
+		student.nimmtAnVorlesungTeil(nameVorlesung);
 	}
 	
 	/**
@@ -177,26 +182,23 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 			csv.oeffnen(properties);
 			String nullString = null;
 			String auchNullString = "0";
+			String plzNullString = "00000";
 			
 			//Daten fuer den Dozenten
 			if(this.dozent != null) {
-				String dozentenNummer = "" + dozent.getPersonenNummer();
-				csv.schreiben(dozentenNummer);
-				String dozentVorname = "D" + dozent.getName().getVorName();
+				String dozentVorname = dozent.getName().getVorName();
 				csv.schreiben(dozentVorname);
-				String dozentenNachname = "D" + dozent.getName().getNachName();
+				String dozentenNachname = dozent.getName().getNachName();
 				csv.schreiben(dozentenNachname);
-				String dozentenStrasse = "D" + dozent.getAdresse().getStrasse();
+				String dozentenStrasse = dozent.getAdresse().getStrasse();
 				csv.schreiben(dozentenStrasse);
-				String dozentenHausNummer = "D" + dozent.getAdresse().getHausNummer();
+				String dozentenHausNummer = "" + dozent.getAdresse().getHausNummer();
 				csv.schreiben(dozentenHausNummer);
-				String dozentenOrt = "D" + dozent.getAdresse().getOrt();
+				String dozentenOrt = dozent.getAdresse().getOrt();
 				csv.schreiben(dozentenOrt);
-				String dozentenPLZ = "D" + dozent.getAdresse().getPostLeitZahl();
+				String dozentenPLZ = dozent.getAdresse().getPostLeitZahl();
 				csv.schreiben(dozentenPLZ);
 			} else {
-				String dozentenNummer = "" + auchNullString;
-				csv.schreiben(dozentenNummer);
 				String dozentVorname = nullString;
 				csv.schreiben(dozentVorname);
 				String dozentenNachname = nullString;
@@ -207,7 +209,7 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 				csv.schreiben(dozentenHausNummer);
 				String dozentenOrt = nullString;
 				csv.schreiben(dozentenOrt);
-				String dozentenPLZ = nullString;
+				String dozentenPLZ = plzNullString;
 				csv.schreiben(dozentenPLZ);
 			}
 				
@@ -229,21 +231,19 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 			if(this.student != null) {
 				String matrikelNummer = student.getMatrikelNummer();
 				csv.schreiben(matrikelNummer);
-				String studentVorname = "S" + student.getName().getVorName();
+				String studentVorname = student.getName().getVorName();
 				csv.schreiben(studentVorname);
-				String studentenNachname = "S" + student.getName().getNachName();
+				String studentenNachname = student.getName().getNachName();
 				csv.schreiben(studentenNachname);
-				String studentenStrasse = "S" + student.getAdresse().getStrasse();
+				String studentenStrasse = student.getAdresse().getStrasse();
 				csv.schreiben(studentenStrasse);
-				String studentHausnummer = "S" + student.getAdresse().getHausNummer();
+				String studentHausnummer = "" + student.getAdresse().getHausNummer();
 				csv.schreiben(studentHausnummer);
-				String studentOrt = "S" + student.getAdresse().getOrt();
+				String studentOrt = student.getAdresse().getOrt();
 				csv.schreiben(studentOrt);
-				String studentPLZ = "S" + student.getAdresse().getPostLeitZahl();
+				String studentPLZ = student.getAdresse().getPostLeitZahl();
 				csv.schreiben(studentPLZ);
-				String studentenVorelsungKuerzel = "S" + student.getVorlesungsKuerzel();
-				csv.schreiben(studentenVorelsungKuerzel);
-				String studentenVorlesungName = "S" + student.getVorlesungsName();
+				String studentenVorlesungName = student.getVorlesungsName();
 				csv.schreiben(studentenVorlesungName);
 				String note = "" + vorlesung.getNote();
 				csv.schreiben(note);
@@ -260,10 +260,8 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 				csv.schreiben(studentHausnummer);
 				String studentOrt = nullString;
 				csv.schreiben(studentOrt);
-				String studentPLZ = nullString;
+				String studentPLZ = plzNullString;
 				csv.schreiben(studentPLZ);
-				String studentenVorelsungKuerzel = nullString;
-				csv.schreiben(studentenVorelsungKuerzel);
 				String studentenVorlesungName = nullString;
 				csv.schreiben(studentenVorlesungName);
 				String note = auchNullString;
@@ -286,8 +284,71 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 	 * @return das geladene Objekt aus den Daten der CSV.
 	 * @since 1.0.0
 	 */
-	public static PersonenVerwaltung ladeCSV(String dateiName) {
+	private static PersonenVerwaltung ladeCSV(String dateiName) {
+		CSV csv = new CSV();
+    	Properties properties = new Properties();
+    	properties.setProperty("Dateiname", dateiName + ".csv");
+    	properties.setProperty("Modus", "l");
+    	
+    	try {
+    		csv.oeffnen(properties);
+    		ArrayList<String> ausgabe = (ArrayList<String>)csv.lesen();
+    		String[] ausgeleseneObjekte = new String[17];
+    		for(int i = 0; i < ausgeleseneObjekte.length; i++) {
+    			ausgeleseneObjekte = ausgabe.get(0).split(",");
+    		}
+    		PersonenVerwaltung pV = new PersonenVerwaltung();
+    		
+    		//Daten des Dozenten
+    		String dozentenVorname = ausgeleseneObjekte[0];
+    		String dozentNachname = ausgeleseneObjekte[1];
+    		String dozentStrasse = ausgeleseneObjekte[2];
+    		String dozentHausNummer = ausgeleseneObjekte[3];
+    		int dZHN = Integer.parseInt(dozentHausNummer);
+    		String dozentOrt = ausgeleseneObjekte[4];
+    		String dozentPLZ = ausgeleseneObjekte[5];
+    		Dozent dozent = new Dozent(dozentenVorname, dozentNachname, dozentStrasse, dZHN, dozentOrt, dozentPLZ);
+    		PersonenVerwaltung.geladenerDozent = dozent;  
+    		
+    		//Daten der Vorlesung
+    		String vorlesungsKuerzel = ausgeleseneObjekte[6];
+    		String vorlesungName = ausgeleseneObjekte[7];
+    		Vorlesung vorlesung = new Vorlesung(vorlesungName);
+    		vorlesung.setVorlesung(vorlesungsKuerzel, vorlesungName, dozent);
+    		PersonenVerwaltung.geladeneVorlesung = vorlesung;
+    		
+    		//Daten des Studenten
+    		String matrikelNummer = ausgeleseneObjekte[8];
+    		String studentVorname = ausgeleseneObjekte[9];
+    		String studentnachname = ausgeleseneObjekte[10];
+    		String studentenStrasse = ausgeleseneObjekte[11];
+    		String studHNR = ausgeleseneObjekte[12];
+    		int studentHausNummer = Integer.parseInt(studHNR);
+    		String studentOrt = ausgeleseneObjekte[13];
+    		String studentPLZ = ausgeleseneObjekte[14];
+    		String studentVorlesung = ausgeleseneObjekte[15];
+    		String n = ausgeleseneObjekte[16];
+    		System.out.println("Was ist n " + n);
+    		double note = Double.parseDouble(n);
+    		Student student = new Student(studentVorname, studentnachname, studentenStrasse, studentHausNummer, studentOrt, studentPLZ);
+    		student.nimmtAnVorlesungTeil(vorlesungName);
+    		student.setGeladeneNote(note);
+    		PersonenVerwaltung.geladenerStudent = student;
+    		return pV;
+    	} catch(IOException fehler) {
+    		System.err.println(fehler.getMessage());
+    	}
+		
 		return null;
+	}	
+	
+	@Override
+	public PersonenVerwaltung ladecsv(String dateiName) {		
+		this.pV = PersonenVerwaltung.ladeCSV(dateiName);
+		this.dozent = PersonenVerwaltung.geladenerDozent;
+	    this.vorlesung = PersonenVerwaltung.geladeneVorlesung;
+		this.student = PersonenVerwaltung.geladenerStudent;
+		return pV;
 	}
 		
 	/**
