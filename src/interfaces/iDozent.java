@@ -26,7 +26,7 @@ public interface iDozent {
 	public void erstelleVorlesung(String nameVorlesung);
 	
 	/**
-	 * Diese Methode traget die Note ein.
+	 * Diese Methode traegt die Note ein.
 	 * @param note Die uebergebene Note.
 	 * @since 1.0.0
 	 */
