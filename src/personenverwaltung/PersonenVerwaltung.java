@@ -175,20 +175,100 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 		
 		try {
 			csv.oeffnen(properties);
-			String dozentenNummer = "" + dozent.getPersonenNummer();
-			csv.schreiben(dozentenNummer);
-			String dozentVorname = "D" + dozent.getName().getVorName();
-			csv.schreiben(dozentVorname);
-			String dozentenNachname = "D" + dozent.getName().getNachName();
-			csv.schreiben(dozentenNachname);
-			String dozentenStrasse = "D" + dozent.getAdresse().getStrasse();
-			csv.schreiben(dozentenStrasse);
-			String dozentenHausNummer = "D" + dozent.getAdresse().getHausNummer();
-			csv.schreiben(dozentenHausNummer);
-			String dozentenOrt = "D" + dozent.getAdresse().getOrt();
-			csv.schreiben(dozentenOrt);
-			String dozentenPLZ = "D" + dozent.getAdresse().getPostLeitZahl();
-			csv.schreiben(dozentenPLZ);
+			String nullString = null;
+			String auchNullString = "0";
+			
+			//Daten fuer den Dozenten
+			if(this.dozent != null) {
+				String dozentenNummer = "" + dozent.getPersonenNummer();
+				csv.schreiben(dozentenNummer);
+				String dozentVorname = "D" + dozent.getName().getVorName();
+				csv.schreiben(dozentVorname);
+				String dozentenNachname = "D" + dozent.getName().getNachName();
+				csv.schreiben(dozentenNachname);
+				String dozentenStrasse = "D" + dozent.getAdresse().getStrasse();
+				csv.schreiben(dozentenStrasse);
+				String dozentenHausNummer = "D" + dozent.getAdresse().getHausNummer();
+				csv.schreiben(dozentenHausNummer);
+				String dozentenOrt = "D" + dozent.getAdresse().getOrt();
+				csv.schreiben(dozentenOrt);
+				String dozentenPLZ = "D" + dozent.getAdresse().getPostLeitZahl();
+				csv.schreiben(dozentenPLZ);
+			} else {
+				String dozentenNummer = "" + auchNullString;
+				csv.schreiben(dozentenNummer);
+				String dozentVorname = nullString;
+				csv.schreiben(dozentVorname);
+				String dozentenNachname = nullString;
+				csv.schreiben(dozentenNachname);
+				String dozentenStrasse = nullString;
+				csv.schreiben(dozentenStrasse);
+				String dozentenHausNummer = auchNullString;
+				csv.schreiben(dozentenHausNummer);
+				String dozentenOrt = nullString;
+				csv.schreiben(dozentenOrt);
+				String dozentenPLZ = nullString;
+				csv.schreiben(dozentenPLZ);
+			}
+				
+			//Daten fuer die Vorlesung
+			if(this.vorlesung != null) {
+				String vorlesungsKuerzel = vorlesung.getVorlesungsKuerzel();
+				csv.schreiben(vorlesungsKuerzel);
+				String vorlesungsName = vorlesung.getVorlesungsName();
+				csv.schreiben(vorlesungsName);
+			} else {
+				String vorlesungsKuerzel = nullString;
+				csv.schreiben(vorlesungsKuerzel);
+				String vorlesungsName = nullString;
+				csv.schreiben(vorlesungsName);
+			}
+			
+			
+			//Daten fuer den Studenten
+			if(this.student != null) {
+				String matrikelNummer = student.getMatrikelNummer();
+				csv.schreiben(matrikelNummer);
+				String studentVorname = "S" + student.getName().getVorName();
+				csv.schreiben(studentVorname);
+				String studentenNachname = "S" + student.getName().getNachName();
+				csv.schreiben(studentenNachname);
+				String studentenStrasse = "S" + student.getAdresse().getStrasse();
+				csv.schreiben(studentenStrasse);
+				String studentHausnummer = "S" + student.getAdresse().getHausNummer();
+				csv.schreiben(studentHausnummer);
+				String studentOrt = "S" + student.getAdresse().getOrt();
+				csv.schreiben(studentOrt);
+				String studentPLZ = "S" + student.getAdresse().getPostLeitZahl();
+				csv.schreiben(studentPLZ);
+				String studentenVorelsungKuerzel = "S" + student.getVorlesungsKuerzel();
+				csv.schreiben(studentenVorelsungKuerzel);
+				String studentenVorlesungName = "S" + student.getVorlesungsName();
+				csv.schreiben(studentenVorlesungName);
+				String note = "" + vorlesung.getNote();
+				csv.schreiben(note);
+			} else {
+				String matrikelNummer = nullString;
+				csv.schreiben(matrikelNummer);
+				String studentVorname = nullString;
+				csv.schreiben(studentVorname);
+				String studentenNachname = nullString;
+				csv.schreiben(studentenNachname);
+				String studentenStrasse = nullString;
+				csv.schreiben(studentenStrasse);
+				String studentHausnummer = auchNullString;
+				csv.schreiben(studentHausnummer);
+				String studentOrt = nullString;
+				csv.schreiben(studentOrt);
+				String studentPLZ = nullString;
+				csv.schreiben(studentPLZ);
+				String studentenVorelsungKuerzel = nullString;
+				csv.schreiben(studentenVorelsungKuerzel);
+				String studentenVorlesungName = nullString;
+				csv.schreiben(studentenVorlesungName);
+				String note = auchNullString;
+				csv.schreiben(note);
+			}			
 		} catch(IOException fehler) {
 			System.err.println(fehler.getMessage());
 		} finally {

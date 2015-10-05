@@ -58,6 +58,24 @@ class Student extends Person implements Serializable{
 	}
 	
 	/**
+	 * Liefert das Vorlesungskuerzel.
+	 * @return das Vorlesungskuerzel.
+	 * @since 1.0.0
+	 */
+	protected String getVorlesungsKuerzel() {
+		return vorlesung.getVorlesungsKuerzel();
+	}
+	
+	/**
+	 * Liefert den Namen der Vorlesung.
+	 * @return den Namen der Vorlesung.
+	 * @since 1.0.0
+	 */
+	protected String getVorlesungsName() {
+		return vorlesung.getVorlesungsName();
+	}
+	
+	/**
 	 * Liefert die Daten des Objektes.
 	 * @return die Daten des Objektes.
 	 * @since 1.0.0
