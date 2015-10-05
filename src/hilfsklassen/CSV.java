@@ -40,24 +40,9 @@ public class CSV implements iSpeichernLaden {
 
 	@Override
 	public void schreiben(Object object) throws IOException {
-		Object[][] daten = (Object[][])object;
-		
-		for(Object[] linie : daten) {
-			boolean erster = true;
-			
-			for(Object feld: linie) {
-				if(erster) {
-					erster = false;
-				} else {
-					bw.write(",");
-				}
-				
-				if(feld != null) {
-					bw.write(feld.toString());
-				}
-			}
-			bw.write("\n");
-		}
+		String daten = (String)object;
+		System.out.println("Daten sind: " + daten);
+		bw.write(daten + ",");		
 	}
 
 	@Override

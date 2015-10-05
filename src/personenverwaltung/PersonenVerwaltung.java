@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Properties;
 
+import hilfsklassen.CSV;
 import hilfsklassen.PDF;
 import hilfsklassen.Serialisieren;
 import interfaces.iDozent;
@@ -167,7 +168,36 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 	 */
 	@Override
 	public void speichernCSV(String dateiName) {
+		CSV csv = new CSV();
+		Properties properties = new Properties();
+		properties.setProperty("Dateiname", dateiName + ".csv");
+		properties.setProperty("Modus", "s");
 		
+		try {
+			csv.oeffnen(properties);
+			String dozentenNummer = "" + dozent.getPersonenNummer();
+			csv.schreiben(dozentenNummer);
+			String dozentVorname = "D" + dozent.getName().getVorName();
+			csv.schreiben(dozentVorname);
+			String dozentenNachname = "D" + dozent.getName().getNachName();
+			csv.schreiben(dozentenNachname);
+			String dozentenStrasse = "D" + dozent.getAdresse().getStrasse();
+			csv.schreiben(dozentenStrasse);
+			String dozentenHausNummer = "D" + dozent.getAdresse().getHausNummer();
+			csv.schreiben(dozentenHausNummer);
+			String dozentenOrt = "D" + dozent.getAdresse().getOrt();
+			csv.schreiben(dozentenOrt);
+			String dozentenPLZ = "D" + dozent.getAdresse().getPostLeitZahl();
+			csv.schreiben(dozentenPLZ);
+		} catch(IOException fehler) {
+			System.err.println(fehler.getMessage());
+		} finally {
+			try {
+				csv.schliessen(null);
+			} catch(IOException fehler) {
+				System.err.println(fehler.getMessage());
+			}
+		}
 	}
 	
 	/**

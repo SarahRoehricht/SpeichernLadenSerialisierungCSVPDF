@@ -44,7 +44,7 @@ abstract class Person implements Serializable{
 	 * @return die Personennummer.
 	 * @since 1.0.0
 	 */
-	private int getPersonenNummer() {
+	protected int getPersonenNummer() {
 		return personenNummer;
 	}
 
