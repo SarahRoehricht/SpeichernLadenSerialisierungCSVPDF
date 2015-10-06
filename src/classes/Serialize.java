@@ -48,7 +48,7 @@ public class Serialize implements iData {
         try {
             Object object = ois.readObject();
             return object;
-        } catch(ClassNotFoundException fehler) {
+        } catch(ClassNotFoundException error) {
             throw new IOException("Could not deserialize!");
         }
 	}

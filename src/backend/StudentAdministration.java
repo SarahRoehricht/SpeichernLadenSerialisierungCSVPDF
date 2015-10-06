@@ -5,7 +5,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Properties;
 
+import classes.PDF;
 import classes.Serialize;
+import interfaces.iPDF;
 import interfaces.iSerialize;
 import interfaces.iStudent;
 
@@ -16,7 +18,7 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class StudentAdministration implements Serializable, iStudent, iSerialize {
+public class StudentAdministration implements Serializable, iStudent, iSerialize, iPDF {
 	private static final long serialVersionUID = -7061702237466525514L;
 	private HashSet<Student> studentSet;
 	
@@ -121,6 +123,32 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
         }
         return null;
 	}	
+	
+	/**
+	 * This method save the data in a PDF file.
+	 * @param fileName The passed file name.
+	 * @since 1.0.0
+	 */
+	@Override
+	public void savePDF(String fileName) {
+		PDF pdf = new PDF();
+		Properties properties = new Properties();
+		properties.setProperty("Filename", fileName + ".pdf");
+		properties.setProperty("Mode", "s");
+		
+		try {
+			pdf.open(properties);
+			pdf.write(toString());
+		} catch(IOException error) {
+			System.err.println(error.getMessage());
+		} finally {
+			try {
+				pdf.close(null);
+			} catch(IOException error) {
+				System.err.println(error.getMessage());
+			}
+		}
+	}
 	
 	/**
 	 * Returns the data of the object.
