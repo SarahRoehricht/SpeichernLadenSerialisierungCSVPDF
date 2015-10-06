@@ -1,8 +1,12 @@
 package backend;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Properties;
 
+import classes.Serialize;
+import interfaces.iSerialize;
 import interfaces.iStudent;
 
 /**
@@ -12,7 +16,7 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class StudentAdministration implements Serializable, iStudent {
+public class StudentAdministration implements Serializable, iStudent, iSerialize {
 	private static final long serialVersionUID = -7061702237466525514L;
 	private HashSet<Student> studentSet;
 	
@@ -65,6 +69,60 @@ public class StudentAdministration implements Serializable, iStudent {
 	}
 	
 	/**
+	 * This method serializes the data of the program.
+	 * @param fileName The passed fileName.
+	 * @since 1.0.0
+	 */
+	@Override
+	public void saveSerialize(String fileName) {
+		Serialize serial = new Serialize();
+        Properties properties = new Properties();
+        properties.setProperty("Filename",fileName + ".ser");
+        properties.setProperty("Mode", "s");
+
+        try {
+            serial.open(properties);
+            serial.write(this);
+        } catch(IOException fehler) {
+            System.err.println(fehler.getMessage());
+        } finally {
+            try {
+                serial.close(null);
+            } catch(IOException fehler) {
+                System.err.println(fehler.getMessage());
+            }
+        }		
+	}
+
+	/**
+	 * This method loads the serialized data.
+	 * @param fileName The passed file name.
+	 * @return the loaded object.
+	 * @since 1.0.0
+	 */
+	@Override
+	public Object loadSerialize(String fileName) {
+		Serialize serial = new Serialize();
+        Properties properties = new Properties();
+        properties.setProperty("Filename", fileName + ".ser");
+        properties.setProperty("Mode", "l");
+        try {
+            serial.open(properties);
+            StudentAdministration sA = (StudentAdministration)serial.read();
+            return sA;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        } finally {
+            try {
+                serial.close(null);
+            } catch (IOException fehler) {
+                System.out.println(fehler.getMessage());
+            }
+        }
+        return null;
+	}	
+	
+	/**
 	 * Returns the data of the object.
 	 * @since 1.0.0
 	 */
@@ -72,8 +130,8 @@ public class StudentAdministration implements Serializable, iStudent {
 	public String toString(){
 		String outputString = "";
 		for(Student student : studentSet) {
-			outputString += student.toString();
+			outputString += student.toString() + "\n";
 		}
 		return outputString;
-	}	
+	}
 }
