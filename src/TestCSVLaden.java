@@ -26,9 +26,10 @@ public class TestCSVLaden {
 		System.out.println(dozent);
 		student.erzeugeStudenten("Alfred", "Loran", "Geht euch n scheiss an", 10, "Reutlingen", "72762");
 		System.out.println(student);
+		
 		student.nehmeAnVorlesungTeil("Informatik 2");
 		System.out.println(student);
 		dozent.trageNoteEin(1.3);
-		System.out.println(dozent);
+		System.out.println(dozent);		
 	}
 }

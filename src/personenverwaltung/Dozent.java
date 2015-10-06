@@ -52,6 +52,15 @@ class Dozent extends Person implements Serializable {
 	}	
 	
 	/**
+	 * Liefert das Vorlesungs - Objekt.
+	 * @return das Vorlesungs - Objekt.
+	 * @since 1.0.0
+	 */
+	protected Vorlesung getVorlesung() {
+		return vorlesung;
+	}
+	
+	/**
 	 * Liefert die Daten des Objektes.
 	 * @return die Daten des Objektes.
 	 * @since 1.0.0

@@ -52,9 +52,8 @@ class Student extends Person implements Serializable{
 	 * @param vorlesung Die uebergebene Vorlesung.
 	 * @since 1.0.0
 	 */
-	protected void nimmtAnVorlesungTeil(String vorlesungsName) {
-		Vorlesung v = new Vorlesung(vorlesungsName);
-		this.vorlesung = v;		
+	protected void nimmtAnVorlesungTeil(Vorlesung vorlesung) {
+		this.vorlesung = vorlesung;		
 		vorlesung.fuegeStudentHinzu(this);
 	}
 	
@@ -83,6 +82,11 @@ class Student extends Person implements Serializable{
 	 */
 	protected String getVorlesungsName() {
 		return vorlesung.getVorlesungsName();
+	}
+	
+	
+	protected void setVorlesung(Vorlesung vorlesung) {
+		this.vorlesung = vorlesung;
 	}
 	
 	/**

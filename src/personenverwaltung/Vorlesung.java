@@ -146,7 +146,26 @@ class Vorlesung implements Serializable{
 		this.vorlesungsName = vorlesungsName;
 		this.dozent = dozent;
 	}
+	
+	/**
+	 * Liefert das Dozenten - Objekt.
+	 * @return das Dozenten - Objekt.
+	 * @since 1.0.0
+	 */
+	protected Dozent getDozent(){
+		return dozent;
+	}
 
+	/**
+	 * Liefert das Studenten - Objekt.
+	 * @return das Studenten - Objekt.
+	 * @since 1.0.0
+	 * @return
+	 */
+	protected Student getStudent() {
+		return student;
+	}
+	
 	/**
 	 * Liefert die Daten des Objektes.
 	 * @since 1.0.0

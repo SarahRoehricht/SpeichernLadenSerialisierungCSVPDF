@@ -87,7 +87,11 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
 	 */
 	@Override
 	public void nehmeAnVorlesungTeil(String nameVorlesung) {	
-		student.nimmtAnVorlesungTeil(nameVorlesung);
+		if(dozent.getVorlesung().getVorlesungsName().equals(nameVorlesung)) {
+			student.nimmtAnVorlesungTeil(dozent.getVorlesung());	
+		} else {
+			System.out.println("Nope");
+		}
 	}
 	
 	/**
@@ -328,12 +332,15 @@ public class PersonenVerwaltung implements iDozent, iStudent, iSpeichernLadenSer
     		String studentPLZ = ausgeleseneObjekte[14];
     		String studentVorlesung = ausgeleseneObjekte[15];
     		String n = ausgeleseneObjekte[16];
-    		System.out.println("Was ist n " + n);
     		double note = Double.parseDouble(n);
     		Student student = new Student(studentVorname, studentnachname, studentenStrasse, studentHausNummer, studentOrt, studentPLZ);
-    		student.nimmtAnVorlesungTeil(vorlesungName);
-    		student.setGeladeneNote(note);
-    		PersonenVerwaltung.geladenerStudent = student;
+    		if(studentVorlesung == null) {
+    			student.setVorlesung(null);
+    		} else {
+    			student.nimmtAnVorlesungTeil(geladeneVorlesung);
+        		student.setGeladeneNote(note);
+        		PersonenVerwaltung.geladenerStudent = student;
+    		}    		    	
     		return pV;
     	} catch(IOException fehler) {
     		System.err.println(fehler.getMessage());
