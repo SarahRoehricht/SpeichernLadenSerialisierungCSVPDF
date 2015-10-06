@@ -1,11 +1,14 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * This class represents a student.
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Student {
+class Student implements Serializable {
+	private static final long serialVersionUID = -6535321431081443080L;
 	private String studentNumber;
 	private Name name;
 	private Address address;
@@ -48,7 +51,7 @@ class Student {
 	 * @since 1.0.0
 	 */
 	protected String getStudentNumber() {
-		return studentNumber;
+		return studentNumber.toUpperCase();
 	}
 
 	/**

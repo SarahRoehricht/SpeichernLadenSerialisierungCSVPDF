@@ -1,11 +1,14 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * This class represents the address.
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Address {
+class Address implements Serializable {
+	private static final long serialVersionUID = 2940819290418119477L;
 	private String street;
 	private int houseNumber;
 	private String place;
@@ -111,8 +114,8 @@ class Address {
 	@Override
 	public String toString() {
 		String outputString = "";
-		if((getStreet() == null) && (getHouseNumber() == 0) && 
-		   (getPlace() == null) && (getPostalCode() == null)) {
+		if((getStreet() != null) && (getHouseNumber() != 0) && 
+		   (getPlace() != null) && (getPostalCode() != null)) {
 			outputString += "Street: " + getStreet()+ "\n" +
 							"House number: " + getHouseNumber() + "\n" + 
 							"Place: " + getPlace() + "\n" +

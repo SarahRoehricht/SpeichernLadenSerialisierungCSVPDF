@@ -1,11 +1,14 @@
 package backend;
 
+import java.io.Serializable;
+
 /**
  * This class represents a name.
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Name {
+class Name implements Serializable {
+	private static final long serialVersionUID = -3222162171869596544L;
 	private String preName;
 	private String surName;
 	
