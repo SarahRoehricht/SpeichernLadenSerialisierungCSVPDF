@@ -5,8 +5,10 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Properties;
 
+import classes.CSV;
 import classes.PDF;
 import classes.Serialize;
+import interfaces.iCSV;
 import interfaces.iPDF;
 import interfaces.iSerialize;
 import interfaces.iStudent;
@@ -18,7 +20,7 @@ import interfaces.iStudent;
  * @author Alfred Loran
  * @version 1.0.0
  */
-public class StudentAdministration implements Serializable, iStudent, iSerialize, iPDF {
+public class StudentAdministration implements Serializable, iStudent, iSerialize, iPDF, iCSV {
 	private static final long serialVersionUID = -7061702237466525514L;
 	private HashSet<Student> studentSet;
 	
@@ -148,6 +150,23 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
 				System.err.println(error.getMessage());
 			}
 		}
+	}
+	
+	@Override
+	public void saveCSV(String fileName) {
+		CSV csv = new CSV();
+		Properties properties = new Properties();
+		properties.setProperty("Filename", fileName);
+		properties.setProperty("Mode", "s");
+		try {
+			csv.open(properties);
+		}
+	}
+
+	@Override
+	public Object loadCSV(String fileName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	/**
