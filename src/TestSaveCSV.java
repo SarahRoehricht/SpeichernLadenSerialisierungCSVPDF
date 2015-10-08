@@ -2,6 +2,11 @@ import backend.StudentAdministration;
 import interfaces.iCSV;
 import interfaces.iStudent;
 
+/**
+ * Testclass for saving program in a CSV file
+ * @author Alfred Loran
+ * @version 1.0.0
+ */
 public class TestSaveCSV {	
 	public static void main(String[] args) {
 		StudentAdministration sA = new StudentAdministration();
