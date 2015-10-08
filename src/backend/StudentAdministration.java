@@ -2,6 +2,7 @@ package backend;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Properties;
 
@@ -196,8 +197,47 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
 
 	@Override
 	public Object loadCSV(String fileName) {
-		// TODO Auto-generated method stub
-		return null;
+		CSV csv = new CSV();
+    	Properties properties = new Properties();
+    	properties.setProperty("Filename", fileName + ".csv");
+    	properties.setProperty("Mode", "l");
+    	try {
+    		csv.open(properties);
+    		ArrayList<String> output = (ArrayList<String>)csv.read();
+    		String[] readedAttributes = new String[7];
+    		for(int i = 0; i < readedAttributes.length; i++) {
+    			readedAttributes = output.get(0).split(",");
+    		}
+    		
+    		if(readedAttributes[0] == null) {
+    			StudentAdministration sA = new StudentAdministration();
+    			return sA;
+    		} else {
+    			String studentNumber = readedAttributes[0];
+    			String preName = readedAttributes[1];
+    			String surName = readedAttributes[2];
+    			String street = readedAttributes[3];
+    			int houseNumber = Integer.parseInt(readedAttributes[4]);
+    			String place = readedAttributes[5];
+    			String postalCode = readedAttributes[6];
+    			StudentAdministration sA = new StudentAdministration();
+    			Student student = new Student();
+    			student.setStudentNumber(studentNumber);
+    			student.setName(new Name(preName,surName));
+    			student.setAddress(new Address(street, houseNumber, place, postalCode));
+    			addStudent(student);
+    			return sA;
+    		}
+    	} catch(IOException error) {
+    		System.err.println(error.getMessage());
+    	} finally {
+    		try {
+    			csv.close(null);
+    		} catch(IOException error) {
+    			System.err.println(error.getMessage());
+    		}
+    	}
+    	return null;
 	}
 	
 	/**
