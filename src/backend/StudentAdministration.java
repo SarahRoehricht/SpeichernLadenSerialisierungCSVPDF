@@ -155,12 +155,43 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
 	@Override
 	public void saveCSV(String fileName) {
 		CSV csv = new CSV();
-		Properties properties = new Properties();
-		properties.setProperty("Filename", fileName);
-		properties.setProperty("Mode", "s");
-		try {
-			csv.open(properties);
-		}
+    	Properties properties = new Properties();
+    	properties.setProperty("Filename", fileName + ".csv");
+    	properties.setProperty("Mode", "s");
+    	
+    	try {
+    		csv.open(properties);
+    		String nullS = "null";
+    		String nullString = "0";
+    		if(studentSet.isEmpty()) {
+    			for(int i = 0; i < 7; i++) {
+    				if(i != 4) {
+    					csv.write(nullS);
+    				} else {
+    					csv.write(nullString);
+    				}
+    			}
+    		} else {
+    			for(Student student : studentSet) {
+    				csv.write(student.getStudentNumber());
+    				csv.write(student.getName().getPreName());
+    				csv.write(student.getName().getSurName());
+    				csv.write(student.getAddress().getStreet());
+    				csv.write("" + student.getAddress().getHouseNumber());
+    				csv.write(student.getAddress().getPlace());
+    				csv.write(student.getAddress().getPostalCode());
+    				csv.write("#");
+    			}
+    		}    		
+    	} catch(IOException error) {
+    		System.err.println(error.getMessage());
+    	} finally {
+    		try {
+    			csv.close(null);
+    		} catch(IOException error) {
+    			System.err.println(error.getMessage());
+    		}
+    	}
 	}
 
 	@Override

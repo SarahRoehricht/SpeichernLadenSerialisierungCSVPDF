@@ -36,7 +36,11 @@ public class CSV implements iData {
 	@Override
 	public void write(Object object) throws IOException {
 		String daten = (String)object;
-		bw.write(daten + ",");
+		if(daten.equals("#")) {
+			bw.write("\n");
+		} else {
+			bw.write(daten + ",");
+		}		
 	}
 
 	@Override
