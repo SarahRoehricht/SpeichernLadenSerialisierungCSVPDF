@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Address implements Serializable {
+public class Address implements Serializable {
 	private static final long serialVersionUID = 2940819290418119477L;
 	private String street;
 	private int houseNumber;
@@ -18,7 +18,7 @@ class Address implements Serializable {
 	 * Generates an address object.
 	 * @since 1.0.0
 	 */
-	protected Address() {}
+	public Address() {}
 	
 	/**
 	 * Generates an address object with the passed parameters.
@@ -28,7 +28,7 @@ class Address implements Serializable {
 	 * @param postalCode The passed postal code
 	 * @since 1.0.0
 	 */
-	protected Address(String street, int houseNumber, String place, String postalCode) {
+	public Address(String street, int houseNumber, String place, String postalCode) {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.place = place;

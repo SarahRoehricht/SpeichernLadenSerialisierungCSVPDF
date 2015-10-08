@@ -13,7 +13,7 @@ public class TestSaveCSV {
 		iStudent student = sA;
 		iCSV csv = sA;
 		student.generateStudent("Alfred", "Loran", "You wish", 10, "Reutlingen", "72762");
-		//student.generateStudent("Max", "Mustermann", "Musterstrasse", 1, "Mussterstadt", "12345");		
+		student.generateStudent("Max", "Mustermann", "Musterstrasse", 1, "Mussterstadt", "12345");		
 		System.out.println(student);
 		csv.saveCSV("TestCSV");
 	}

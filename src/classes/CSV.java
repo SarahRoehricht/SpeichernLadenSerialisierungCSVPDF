@@ -10,6 +10,10 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import backend.Address;
+import backend.Name;
+import backend.Student;
+import backend.StudentAdministration;
 import interfaces.iData;
 
 public class CSV implements iData {
@@ -46,11 +50,35 @@ public class CSV implements iData {
 	@Override
 	public Object read() throws IOException {
 		String linie;
-		ArrayList<String> linien = new ArrayList<String>();		
+		ArrayList<String> linien = new ArrayList<String>();
+		ArrayList<Student> students = new ArrayList<>();
 		while((linie = br.readLine()) != null) {
 			linien.add(linie);
+			String[] readedAttributes = new String[7];			
+			for(int i = 0; i < readedAttributes.length; i++) {
+    			readedAttributes = linien.get(0).split(",");
+    		}
+			
+			if(readedAttributes[0] == null) {
+    			return students;
+    		} else {
+    			String studentNumber = readedAttributes[0];
+    			String preName = readedAttributes[1];
+    			String surName = readedAttributes[2];
+    			String street = readedAttributes[3];
+    			int houseNumber = Integer.parseInt(readedAttributes[4]);
+    			String place = readedAttributes[5];
+    			String postalCode = readedAttributes[6];
+    			StudentAdministration sA = new StudentAdministration();
+    			Student student = new Student();
+    			student.setStudentNumber(studentNumber);
+    			student.setName(new Name(preName,surName));
+    			student.setAddress(new Address(street, houseNumber, place, postalCode));
+    			students.add(student);
+    		}
+			linien.remove(linie);
 		}			
-		return linien;
+		return students;
 	}
 
 	@Override

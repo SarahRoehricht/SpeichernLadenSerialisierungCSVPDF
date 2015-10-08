@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Student implements Serializable {
+public class Student implements Serializable {
 	private static final long serialVersionUID = -6535321431081443080L;
 	private String studentNumber;
 	private Name name;
@@ -17,7 +17,7 @@ class Student implements Serializable {
 	 * Generates a student object.
 	 * @since 1.0.0
 	 */
-	protected Student() {}
+	public Student() {}
 	
 	/**
 	 * Generates a student object with the passed parameters.
@@ -29,7 +29,7 @@ class Student implements Serializable {
 	 * @param postalCode The passed postal code.
 	 * @since 1.0.0
 	 */
-	protected Student(String preName, String surName, String street, 
+	public Student(String preName, String surName, String street, 
 			          int houseNumber, String place, String postalCode) {
 		this.name = new Name(preName, surName);
 		this.address = new Address(street, houseNumber, place, postalCode);
@@ -50,7 +50,7 @@ class Student implements Serializable {
 	 * @return the student number.
 	 * @since 1.0.0
 	 */
-	protected String getStudentNumber() {
+	public String getStudentNumber() {
 		return studentNumber.toUpperCase();
 	}
 
@@ -59,7 +59,7 @@ class Student implements Serializable {
 	 * @param studentNumber The passed student number.
 	 * @since 1.0.0
 	 */
-	protected void setStudentNumber(String studentNumber) {
+	public void setStudentNumber(String studentNumber) {
 		this.studentNumber = studentNumber;
 	}
 
@@ -68,7 +68,7 @@ class Student implements Serializable {
 	 * @return the name object.
 	 * @since 1.0.0
 	 */
-	protected Name getName() {
+	public Name getName() {
 		return name;
 	}
 
@@ -77,7 +77,7 @@ class Student implements Serializable {
 	 * @param name The passed name object.
 	 * @since 1.0.0
 	 */
-	protected void setName(Name name) {
+	public void setName(Name name) {
 		this.name = name;
 	}
 
@@ -86,7 +86,7 @@ class Student implements Serializable {
 	 * @return the address object.
 	 * @since 1.0.0
 	 */
-	protected Address getAddress() {
+	public Address getAddress() {
 		return address;
 	}
 	
@@ -95,7 +95,7 @@ class Student implements Serializable {
 	 * @param address The passed address object.
 	 * @since 1.0.0
 	 */
-	protected void setAddress(Address address) {
+	public void setAddress(Address address) {
 		this.address = address;
 	}
 	

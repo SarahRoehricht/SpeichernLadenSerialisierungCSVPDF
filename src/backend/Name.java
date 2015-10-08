@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @author Alfred Loran
  * @version 1.0.0
  */
-class Name implements Serializable {
+public class Name implements Serializable {
 	private static final long serialVersionUID = -3222162171869596544L;
 	private String preName;
 	private String surName;
@@ -16,7 +16,7 @@ class Name implements Serializable {
 	 * Generates a name object.
 	 * @since 1.0.0
 	 */
-	protected Name() {}
+	public Name() {}
 	
 	/**
 	 * Generates a name object with the passed parameters.
@@ -24,7 +24,7 @@ class Name implements Serializable {
 	 * @param surName The passed surname
 	 * @since 1.0.0
 	 */
-	protected Name(String preName, String surName) {
+	public Name(String preName, String surName) {
 		this.preName = preName;
 		this.surName = surName;
 	}

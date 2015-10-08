@@ -203,29 +203,15 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
     	properties.setProperty("Mode", "l");
     	try {
     		csv.open(properties);
-    		ArrayList<String> output = (ArrayList<String>)csv.read();
-    		String[] readedAttributes = new String[7];
-    		for(int i = 0; i < readedAttributes.length; i++) {
-    			readedAttributes = output.get(0).split(",");
-    		}
-    		
-    		if(readedAttributes[0] == null) {
+    		ArrayList<Student> students = (ArrayList<Student>) csv.read();
+    		if(students.isEmpty()) {
     			StudentAdministration sA = new StudentAdministration();
     			return sA;
     		} else {
-    			String studentNumber = readedAttributes[0];
-    			String preName = readedAttributes[1];
-    			String surName = readedAttributes[2];
-    			String street = readedAttributes[3];
-    			int houseNumber = Integer.parseInt(readedAttributes[4]);
-    			String place = readedAttributes[5];
-    			String postalCode = readedAttributes[6];
     			StudentAdministration sA = new StudentAdministration();
-    			Student student = new Student();
-    			student.setStudentNumber(studentNumber);
-    			student.setName(new Name(preName,surName));
-    			student.setAddress(new Address(street, houseNumber, place, postalCode));
-    			addStudent(student);
+    			for(Student s : students) {
+    				sA.addStudent(s);
+    			}
     			return sA;
     		}
     	} catch(IOException error) {
@@ -247,8 +233,12 @@ public class StudentAdministration implements Serializable, iStudent, iSerialize
 	@Override
 	public String toString(){
 		String outputString = "";
-		for(Student student : studentSet) {
-			outputString += student.toString() + "\n";
+		if(studentSet.isEmpty()) {
+			outputString = "There are no students!";
+		} else {
+			for(Student student : studentSet) {
+				outputString += student.toString() + "\n";
+			}
 		}
 		return outputString;
 	}
